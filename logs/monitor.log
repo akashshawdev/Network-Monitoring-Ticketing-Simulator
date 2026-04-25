@@ -1,0 +1,252 @@
+2026-04-25 15:17:31 | INFO     | Initialising components...
+2026-04-25 15:17:31 | INFO     | 
+▶  PHASE 1 — MONITORING  (mode=demo)
+2026-04-25 15:17:31 | INFO     | 
+--- Monitoring Cycle 1/2 ---
+2026-04-25 15:17:31 | INFO     | 🔍 Running monitoring cycle — sampling 2 checks...
+2026-04-25 15:17:31 | DEBUG    | CHECK [ISS-0001] CONNECTION_TIMEOUT on api-gateway-prod | severity=HIGH
+2026-04-25 15:17:31 | WARNING  | ⚠️  ALERT [ISS-0001] CONNECTION_TIMEOUT | Host: api-gateway-prod | Severity: HIGH | HTTP 504 Gateway Timeout — upstream service unreachable
+2026-04-25 15:17:31 | INFO     |   🎫 AUTO-TICKET CREATED: TKT-0001 [P2] for ISS-0001
+2026-04-25 15:17:31 | DEBUG    | CHECK [ISS-0002] DNS_RESOLUTION_FAILURE on dns-primary | severity=MEDIUM
+2026-04-25 15:17:31 | WARNING  | ⚠️  ALERT [ISS-0002] DNS_RESOLUTION_FAILURE | Host: dns-primary | Severity: MEDIUM | DNS zone transfer failed — secondary out of sync
+2026-04-25 15:17:31 | INFO     |   🎫 AUTO-TICKET CREATED: TKT-0002 [P3] for ISS-0002
+2026-04-25 15:17:31 | INFO     | 
+--- Monitoring Cycle 2/2 ---
+2026-04-25 15:17:31 | INFO     | 🔍 Running monitoring cycle — sampling 2 checks...
+2026-04-25 15:17:32 | DEBUG    | CHECK [ISS-0003] BANDWIDTH_SATURATION on uplink-port-gi0/1 | severity=MEDIUM
+2026-04-25 15:17:32 | WARNING  | ⚠️  ALERT [ISS-0003] BANDWIDTH_SATURATION | Host: uplink-port-gi0/1 | Severity: MEDIUM | Top talker consuming 80% bandwidth — possible exfiltration
+2026-04-25 15:17:32 | INFO     |   🎫 AUTO-TICKET CREATED: TKT-0003 [P3] for ISS-0003
+2026-04-25 15:17:32 | DEBUG    | CHECK [ISS-0004] CONNECTION_TIMEOUT on db-server-02 | severity=HIGH
+2026-04-25 15:17:32 | WARNING  | ⚠️  ALERT [ISS-0004] CONNECTION_TIMEOUT | Host: db-server-02 | Severity: HIGH | TCP connection to port 443 timing out after 30 s
+2026-04-25 15:17:32 | INFO     |   🎫 AUTO-TICKET CREATED: TKT-0004 [P2] for ISS-0004
+2026-04-25 15:17:32 | INFO     | 
+▶  PHASE 2 — AUTO-RESOLUTION  (4 open tickets)
+2026-04-25 15:17:32 | INFO     | 
+────────────────────────────────────────────────────────────
+2026-04-25 15:17:32 | INFO     | 🔧 TROUBLESHOOTING START: TKT-0003
+2026-04-25 15:17:32 | INFO     |    Issue   : BANDWIDTH_SATURATION
+2026-04-25 15:17:32 | INFO     |    Host    : uplink-port-gi0/1
+2026-04-25 15:17:32 | INFO     |    Priority: P3
+2026-04-25 15:17:32 | INFO     | ────────────────────────────────────────────────────────────
+2026-04-25 15:17:32 | INFO     | 
+  Step 1/4: Identify top talkers
+2026-04-25 15:17:32 | INFO     |   → Action : Use ntopng / NetFlow / show interface counters to find heavy hitters
+2026-04-25 15:17:32 | INFO     |   → Success: IP addresses consuming > 20% bandwidth identified
+2026-04-25 15:17:32 | INFO     | 
+  Step 2/4: Protocol analysis
+2026-04-25 15:17:32 | INFO     |   → Action : Capture 60 s of traffic with tcpdump / Wireshark on saturated interface
+2026-04-25 15:17:32 | INFO     |   → Success: Identify protocol mix (P2P, streaming, backup job, etc.)
+2026-04-25 15:17:32 | INFO     | 
+  Step 3/4: Apply rate limiting
+2026-04-25 15:17:32 | INFO     |   → Action : Configure traffic shaping / QoS policy to throttle non-critical traffic
+2026-04-25 15:17:32 | INFO     |   → Success: Interface utilisation drops below 80%
+2026-04-25 15:17:33 | INFO     | 
+  Step 4/4: Notify stakeholders
+2026-04-25 15:17:33 | INFO     |   → Action : Alert affected teams; document bandwidth policy if violation
+2026-04-25 15:17:33 | INFO     |   → Success: Users acknowledged; HR/security looped in if policy breach
+2026-04-25 15:17:33 | INFO     | 
+  ✅ RESOLVED: TKT-0003 | All 4 runbook steps completed. Issue confirmed resolved by L2-Network.
+2026-04-25 15:17:33 | INFO     | ────────────────────────────────────────────────────────────
+
+2026-04-25 15:17:33 | INFO     | 
+────────────────────────────────────────────────────────────
+2026-04-25 15:17:33 | INFO     | 🔧 TROUBLESHOOTING START: TKT-0004
+2026-04-25 15:17:33 | INFO     |    Issue   : CONNECTION_TIMEOUT
+2026-04-25 15:17:33 | INFO     |    Host    : db-server-02
+2026-04-25 15:17:33 | INFO     |    Priority: P2
+2026-04-25 15:17:33 | INFO     | ────────────────────────────────────────────────────────────
+2026-04-25 15:17:33 | INFO     | 
+  Step 1/5: Port reachability check
+2026-04-25 15:17:33 | INFO     |   → Action : telnet <host> <port> or Test-NetConnection -Port <port>
+2026-04-25 15:17:33 | INFO     |   → Success: Connection accepted or refused (refused = service down, timeout = firewall)
+2026-04-25 15:17:33 | INFO     | 
+  Step 2/5: Firewall rule audit
+2026-04-25 15:17:33 | INFO     |   → Action : Review ACL/security group rules for the affected port/host pair
+2026-04-25 15:17:33 | INFO     |   → Success: Confirm allow rule exists and is not shadowed by deny
+2026-04-25 15:17:34 | INFO     | 
+  Step 3/5: Check service health
+2026-04-25 15:17:34 | INFO     |   → Action : SSH to target server — verify service (nginx, sshd, RDP) is running
+2026-04-25 15:17:34 | INFO     |   → Success: ps aux | grep <service> shows running process
+2026-04-25 15:17:34 | INFO     | 
+  Step 4/5: Review recent change log
+2026-04-25 15:17:34 | INFO     |   → Action : Check change management system for firewall or config changes in last 24 h
+2026-04-25 15:17:34 | INFO     |   → Success: Identify if change caused the timeout
+2026-04-25 15:17:34 | INFO     | 
+  Step 5/5: Restore or rollback
+2026-04-25 15:17:34 | INFO     |   → Action : Revert firewall rule change or restart service as needed
+2026-04-25 15:17:34 | INFO     |   → Success: Connection established successfully
+2026-04-25 15:17:34 | INFO     | 
+  ✅ RESOLVED: TKT-0004 | All 5 runbook steps completed. Issue confirmed resolved by L1-Support.
+2026-04-25 15:17:34 | INFO     | ────────────────────────────────────────────────────────────
+
+2026-04-25 15:17:34 | INFO     | 
+────────────────────────────────────────────────────────────
+2026-04-25 15:17:34 | INFO     | 🔧 TROUBLESHOOTING START: TKT-0001
+2026-04-25 15:17:34 | INFO     |    Issue   : CONNECTION_TIMEOUT
+2026-04-25 15:17:34 | INFO     |    Host    : api-gateway-prod
+2026-04-25 15:17:34 | INFO     |    Priority: P2
+2026-04-25 15:17:34 | INFO     | ────────────────────────────────────────────────────────────
+2026-04-25 15:17:34 | INFO     | 
+  Step 1/5: Port reachability check
+2026-04-25 15:17:34 | INFO     |   → Action : telnet <host> <port> or Test-NetConnection -Port <port>
+2026-04-25 15:17:34 | INFO     |   → Success: Connection accepted or refused (refused = service down, timeout = firewall)
+2026-04-25 15:17:35 | INFO     | 
+  Step 2/5: Firewall rule audit
+2026-04-25 15:17:35 | INFO     |   → Action : Review ACL/security group rules for the affected port/host pair
+2026-04-25 15:17:35 | INFO     |   → Success: Confirm allow rule exists and is not shadowed by deny
+2026-04-25 15:17:35 | INFO     | 
+  Step 3/5: Check service health
+2026-04-25 15:17:35 | INFO     |   → Action : SSH to target server — verify service (nginx, sshd, RDP) is running
+2026-04-25 15:17:35 | INFO     |   → Success: ps aux | grep <service> shows running process
+2026-04-25 15:17:35 | INFO     | 
+  Step 4/5: Review recent change log
+2026-04-25 15:17:35 | INFO     |   → Action : Check change management system for firewall or config changes in last 24 h
+2026-04-25 15:17:35 | INFO     |   → Success: Identify if change caused the timeout
+2026-04-25 15:17:36 | INFO     | 
+  Step 5/5: Restore or rollback
+2026-04-25 15:17:36 | INFO     |   → Action : Revert firewall rule change or restart service as needed
+2026-04-25 15:17:36 | INFO     |   → Success: Connection established successfully
+2026-04-25 15:17:36 | INFO     | 
+  ✅ RESOLVED: TKT-0001 | All 5 runbook steps completed. Issue confirmed resolved by L1-Support.
+2026-04-25 15:17:36 | INFO     | ────────────────────────────────────────────────────────────
+
+2026-04-25 15:17:36 | INFO     | 
+────────────────────────────────────────────────────────────
+2026-04-25 15:17:36 | INFO     | 🔧 TROUBLESHOOTING START: TKT-0002
+2026-04-25 15:17:36 | INFO     |    Issue   : DNS_RESOLUTION_FAILURE
+2026-04-25 15:17:36 | INFO     |    Host    : dns-primary
+2026-04-25 15:17:36 | INFO     |    Priority: P3
+2026-04-25 15:17:36 | INFO     | ────────────────────────────────────────────────────────────
+2026-04-25 15:17:36 | INFO     | 
+  Step 1/5: DNS query test
+2026-04-25 15:17:36 | INFO     |   → Action : nslookup <internal-domain> <dns-server-ip>
+2026-04-25 15:17:36 | INFO     |   → Success: Returns valid IP — if not, DNS server is the issue
+2026-04-25 15:17:36 | INFO     | 
+  Step 2/5: DNS service status
+2026-04-25 15:17:36 | INFO     |   → Action : Check named/unbound/AD DNS service on primary DNS server
+2026-04-25 15:17:36 | INFO     |   → Success: Service running, listening on UDP/TCP 53
+2026-04-25 15:17:37 | INFO     | 
+  Step 3/5: Zone data integrity
+2026-04-25 15:17:37 | INFO     |   → Action : named-checkzone <zone> <zonefile> to validate zone file
+2026-04-25 15:17:37 | INFO     |   → Success: No syntax errors, SOA record valid
+2026-04-25 15:17:37 | INFO     | 
+  Step 4/5: Failover to secondary DNS
+2026-04-25 15:17:37 | INFO     |   → Action : Update DHCP scope to point to secondary DNS while primary is investigated
+2026-04-25 15:17:37 | INFO     |   → Success: Client resolution works via secondary
+2026-04-25 15:17:37 | INFO     | 
+  Step 5/5: Restore primary DNS
+2026-04-25 15:17:37 | INFO     |   → Action : Fix zone file / restart service / force zone transfer
+2026-04-25 15:17:37 | INFO     |   → Success: dig @primary <domain> returns correct A record
+2026-04-25 15:17:38 | INFO     | 
+  ✅ RESOLVED: TKT-0002 | All 5 runbook steps completed. Issue confirmed resolved by L2-Network.
+2026-04-25 15:17:38 | INFO     | ────────────────────────────────────────────────────────────
+
+2026-04-25 15:17:38 | INFO     | 
+▶  PHASE 3 — FINAL REPORT
+2026-04-25 15:17:38 | INFO     | 
+══════════════════════════════════════════════════════════════
+2026-04-25 15:17:38 | INFO     |   TICKET REPORT — END OF MONITORING CYCLE
+2026-04-25 15:17:38 | INFO     | ══════════════════════════════════════════════════════════════
+2026-04-25 15:17:38 | INFO     | 
+  STATS:
+2026-04-25 15:17:38 | INFO     |     Total tickets : 4
+2026-04-25 15:17:38 | INFO     |     Open          : 0
+2026-04-25 15:17:38 | INFO     |     In Progress   : 0
+2026-04-25 15:17:38 | INFO     |     Resolved      : 4
+2026-04-25 15:17:38 | INFO     |     Critical (P1) : 0
+2026-04-25 15:17:38 | INFO     | 
+  TICKET LIST:
+2026-04-25 15:17:38 | INFO     |   ──────────────────────────────────────────────────────────
+2026-04-25 15:17:38 | INFO     |   [TKT-0003] P3 | RESOLVED     | BANDWIDTH_SATURATION      | Host: uplink-port-gi0/1
+2026-04-25 15:17:38 | INFO     |   [TKT-0004] P2 | RESOLVED     | CONNECTION_TIMEOUT        | Host: db-server-02
+2026-04-25 15:17:38 | INFO     |   [TKT-0001] P2 | RESOLVED     | CONNECTION_TIMEOUT        | Host: api-gateway-prod
+2026-04-25 15:17:38 | INFO     |   [TKT-0002] P3 | RESOLVED     | DNS_RESOLUTION_FAILURE    | Host: dns-primary
+2026-04-25 15:17:38 | INFO     | 
+  TICKET DETAILS:
+2026-04-25 15:17:38 | INFO     | 
+  ┌─ TKT-0003 ─────────────────────
+2026-04-25 15:17:38 | INFO     |   │  Title      : Bandwidth Saturation — uplink-port-gi0/1
+2026-04-25 15:17:38 | INFO     |   │  Priority   : P3  |  Status: RESOLVED
+2026-04-25 15:17:38 | INFO     |   │  Host       : uplink-port-gi0/1
+2026-04-25 15:17:38 | INFO     |   │  Assigned   : L2-Network
+2026-04-25 15:17:38 | INFO     |   │  Created    : 2026-04-25T15:17:32
+2026-04-25 15:17:38 | INFO     |   │  Resolved   : 2026-04-25T15:17:33
+2026-04-25 15:17:38 | INFO     |   │  Resolution : All 4 runbook steps completed. Issue confirmed resolved by L2-Network.
+2026-04-25 15:17:38 | INFO     |   │  History (8 events):
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:32] AutoMonitor: Ticket created
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:32] TicketSystem: Assigned to L2-Network
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:32] L2-Network: Status changed OPEN → IN_PROGRESS | Note: Runbook started
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:32] L2-Network: Step 1: Identify top talkers — COMPLETED
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:32] L2-Network: Step 2: Protocol analysis — COMPLETED
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:33] L2-Network: Step 3: Apply rate limiting — COMPLETED
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:33] L2-Network: Step 4: Notify stakeholders — COMPLETED
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:33] L2-Network: Status changed IN_PROGRESS → RESOLVED | Note: All 4 runbook steps completed. Issue confirmed resolved by L2-Network.
+2026-04-25 15:17:38 | INFO     |   └──────────────────────────────────────────────────
+2026-04-25 15:17:38 | INFO     | 
+  ┌─ TKT-0004 ─────────────────────
+2026-04-25 15:17:38 | INFO     |   │  Title      : Connection Timeout — db-server-02
+2026-04-25 15:17:38 | INFO     |   │  Priority   : P2  |  Status: RESOLVED
+2026-04-25 15:17:38 | INFO     |   │  Host       : db-server-02
+2026-04-25 15:17:38 | INFO     |   │  Assigned   : L1-Support
+2026-04-25 15:17:38 | INFO     |   │  Created    : 2026-04-25T15:17:32
+2026-04-25 15:17:38 | INFO     |   │  Resolved   : 2026-04-25T15:17:34
+2026-04-25 15:17:38 | INFO     |   │  Resolution : All 5 runbook steps completed. Issue confirmed resolved by L1-Support.
+2026-04-25 15:17:38 | INFO     |   │  History (9 events):
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:32] AutoMonitor: Ticket created
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:33] TicketSystem: Assigned to L1-Support
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:33] L1-Support: Status changed OPEN → IN_PROGRESS | Note: Runbook started
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:33] L1-Support: Step 1: Port reachability check — COMPLETED
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:34] L1-Support: Step 2: Firewall rule audit — COMPLETED
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:34] L1-Support: Step 3: Check service health — COMPLETED
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:34] L1-Support: Step 4: Review recent change log — COMPLETED
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:34] L1-Support: Step 5: Restore or rollback — COMPLETED
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:34] L1-Support: Status changed IN_PROGRESS → RESOLVED | Note: All 5 runbook steps completed. Issue confirmed resolved by L1-Support.
+2026-04-25 15:17:38 | INFO     |   └──────────────────────────────────────────────────
+2026-04-25 15:17:38 | INFO     | 
+  ┌─ TKT-0001 ─────────────────────
+2026-04-25 15:17:38 | INFO     |   │  Title      : Connection Timeout — api-gateway-prod
+2026-04-25 15:17:38 | INFO     |   │  Priority   : P2  |  Status: RESOLVED
+2026-04-25 15:17:38 | INFO     |   │  Host       : api-gateway-prod
+2026-04-25 15:17:38 | INFO     |   │  Assigned   : L1-Support
+2026-04-25 15:17:38 | INFO     |   │  Created    : 2026-04-25T15:17:31
+2026-04-25 15:17:38 | INFO     |   │  Resolved   : 2026-04-25T15:17:36
+2026-04-25 15:17:38 | INFO     |   │  Resolution : All 5 runbook steps completed. Issue confirmed resolved by L1-Support.
+2026-04-25 15:17:38 | INFO     |   │  History (9 events):
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:31] AutoMonitor: Ticket created
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:34] TicketSystem: Assigned to L1-Support
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:34] L1-Support: Status changed OPEN → IN_PROGRESS | Note: Runbook started
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:35] L1-Support: Step 1: Port reachability check — COMPLETED
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:35] L1-Support: Step 2: Firewall rule audit — COMPLETED
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:35] L1-Support: Step 3: Check service health — COMPLETED
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:36] L1-Support: Step 4: Review recent change log — COMPLETED
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:36] L1-Support: Step 5: Restore or rollback — COMPLETED
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:36] L1-Support: Status changed IN_PROGRESS → RESOLVED | Note: All 5 runbook steps completed. Issue confirmed resolved by L1-Support.
+2026-04-25 15:17:38 | INFO     |   └──────────────────────────────────────────────────
+2026-04-25 15:17:38 | INFO     | 
+  ┌─ TKT-0002 ─────────────────────
+2026-04-25 15:17:38 | INFO     |   │  Title      : Dns Resolution Failure — dns-primary
+2026-04-25 15:17:38 | INFO     |   │  Priority   : P3  |  Status: RESOLVED
+2026-04-25 15:17:38 | INFO     |   │  Host       : dns-primary
+2026-04-25 15:17:38 | INFO     |   │  Assigned   : L2-Network
+2026-04-25 15:17:38 | INFO     |   │  Created    : 2026-04-25T15:17:31
+2026-04-25 15:17:38 | INFO     |   │  Resolved   : 2026-04-25T15:17:38
+2026-04-25 15:17:38 | INFO     |   │  Resolution : All 5 runbook steps completed. Issue confirmed resolved by L2-Network.
+2026-04-25 15:17:38 | INFO     |   │  History (9 events):
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:31] AutoMonitor: Ticket created
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:36] TicketSystem: Assigned to L2-Network
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:36] L2-Network: Status changed OPEN → IN_PROGRESS | Note: Runbook started
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:36] L2-Network: Step 1: DNS query test — COMPLETED
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:37] L2-Network: Step 2: DNS service status — COMPLETED
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:37] L2-Network: Step 3: Zone data integrity — COMPLETED
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:37] L2-Network: Step 4: Failover to secondary DNS — COMPLETED
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:38] L2-Network: Step 5: Restore primary DNS — COMPLETED
+2026-04-25 15:17:38 | INFO     |   │    [2026-04-25T15:17:38] L2-Network: Status changed IN_PROGRESS → RESOLVED | Note: All 5 runbook steps completed. Issue confirmed resolved by L2-Network.
+2026-04-25 15:17:38 | INFO     |   └──────────────────────────────────────────────────
+2026-04-25 15:17:38 | INFO     | 
+══════════════════════════════════════════════════════════════
+2026-04-25 15:17:38 | INFO     | 
+  📄 Full JSON export saved to data/last_run.json
+2026-04-25 15:17:38 | INFO     |   📝 Full log saved to logs/monitor.log
+2026-04-25 15:17:38 | INFO     | 
+  Pipeline complete. ✓
+

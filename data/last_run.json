@@ -1,0 +1,256 @@
+{
+  "run_at": "2026-04-25T15:17:38",
+  "mode": "demo",
+  "tickets": [
+    {
+      "ticket_id": "TKT-0003",
+      "issue_id": "ISS-0003",
+      "issue_type": "BANDWIDTH_SATURATION",
+      "host": "uplink-port-gi0/1",
+      "priority": "P3",
+      "status": "RESOLVED",
+      "title": "Bandwidth Saturation \u2014 uplink-port-gi0/1",
+      "description": "Top talker consuming 80% bandwidth \u2014 possible exfiltration",
+      "created_at": "2026-04-25T15:17:32",
+      "updated_at": "2026-04-25T15:17:33",
+      "assigned_to": "L2-Network",
+      "resolution": "All 4 runbook steps completed. Issue confirmed resolved by L2-Network.",
+      "resolved_at": "2026-04-25T15:17:33",
+      "history": [
+        {
+          "at": "2026-04-25T15:17:32",
+          "event": "Ticket created",
+          "by": "AutoMonitor"
+        },
+        {
+          "at": "2026-04-25T15:17:32",
+          "event": "Assigned to L2-Network",
+          "by": "TicketSystem"
+        },
+        {
+          "at": "2026-04-25T15:17:32",
+          "event": "Status changed OPEN \u2192 IN_PROGRESS | Note: Runbook started",
+          "by": "L2-Network"
+        },
+        {
+          "at": "2026-04-25T15:17:32",
+          "event": "Step 1: Identify top talkers \u2014 COMPLETED",
+          "by": "L2-Network"
+        },
+        {
+          "at": "2026-04-25T15:17:32",
+          "event": "Step 2: Protocol analysis \u2014 COMPLETED",
+          "by": "L2-Network"
+        },
+        {
+          "at": "2026-04-25T15:17:33",
+          "event": "Step 3: Apply rate limiting \u2014 COMPLETED",
+          "by": "L2-Network"
+        },
+        {
+          "at": "2026-04-25T15:17:33",
+          "event": "Step 4: Notify stakeholders \u2014 COMPLETED",
+          "by": "L2-Network"
+        },
+        {
+          "at": "2026-04-25T15:17:33",
+          "event": "Status changed IN_PROGRESS \u2192 RESOLVED | Note: All 4 runbook steps completed. Issue confirmed resolved by L2-Network.",
+          "by": "L2-Network"
+        }
+      ]
+    },
+    {
+      "ticket_id": "TKT-0004",
+      "issue_id": "ISS-0004",
+      "issue_type": "CONNECTION_TIMEOUT",
+      "host": "db-server-02",
+      "priority": "P2",
+      "status": "RESOLVED",
+      "title": "Connection Timeout \u2014 db-server-02",
+      "description": "TCP connection to port 443 timing out after 30 s",
+      "created_at": "2026-04-25T15:17:32",
+      "updated_at": "2026-04-25T15:17:34",
+      "assigned_to": "L1-Support",
+      "resolution": "All 5 runbook steps completed. Issue confirmed resolved by L1-Support.",
+      "resolved_at": "2026-04-25T15:17:34",
+      "history": [
+        {
+          "at": "2026-04-25T15:17:32",
+          "event": "Ticket created",
+          "by": "AutoMonitor"
+        },
+        {
+          "at": "2026-04-25T15:17:33",
+          "event": "Assigned to L1-Support",
+          "by": "TicketSystem"
+        },
+        {
+          "at": "2026-04-25T15:17:33",
+          "event": "Status changed OPEN \u2192 IN_PROGRESS | Note: Runbook started",
+          "by": "L1-Support"
+        },
+        {
+          "at": "2026-04-25T15:17:33",
+          "event": "Step 1: Port reachability check \u2014 COMPLETED",
+          "by": "L1-Support"
+        },
+        {
+          "at": "2026-04-25T15:17:34",
+          "event": "Step 2: Firewall rule audit \u2014 COMPLETED",
+          "by": "L1-Support"
+        },
+        {
+          "at": "2026-04-25T15:17:34",
+          "event": "Step 3: Check service health \u2014 COMPLETED",
+          "by": "L1-Support"
+        },
+        {
+          "at": "2026-04-25T15:17:34",
+          "event": "Step 4: Review recent change log \u2014 COMPLETED",
+          "by": "L1-Support"
+        },
+        {
+          "at": "2026-04-25T15:17:34",
+          "event": "Step 5: Restore or rollback \u2014 COMPLETED",
+          "by": "L1-Support"
+        },
+        {
+          "at": "2026-04-25T15:17:34",
+          "event": "Status changed IN_PROGRESS \u2192 RESOLVED | Note: All 5 runbook steps completed. Issue confirmed resolved by L1-Support.",
+          "by": "L1-Support"
+        }
+      ]
+    },
+    {
+      "ticket_id": "TKT-0001",
+      "issue_id": "ISS-0001",
+      "issue_type": "CONNECTION_TIMEOUT",
+      "host": "api-gateway-prod",
+      "priority": "P2",
+      "status": "RESOLVED",
+      "title": "Connection Timeout \u2014 api-gateway-prod",
+      "description": "HTTP 504 Gateway Timeout \u2014 upstream service unreachable",
+      "created_at": "2026-04-25T15:17:31",
+      "updated_at": "2026-04-25T15:17:36",
+      "assigned_to": "L1-Support",
+      "resolution": "All 5 runbook steps completed. Issue confirmed resolved by L1-Support.",
+      "resolved_at": "2026-04-25T15:17:36",
+      "history": [
+        {
+          "at": "2026-04-25T15:17:31",
+          "event": "Ticket created",
+          "by": "AutoMonitor"
+        },
+        {
+          "at": "2026-04-25T15:17:34",
+          "event": "Assigned to L1-Support",
+          "by": "TicketSystem"
+        },
+        {
+          "at": "2026-04-25T15:17:34",
+          "event": "Status changed OPEN \u2192 IN_PROGRESS | Note: Runbook started",
+          "by": "L1-Support"
+        },
+        {
+          "at": "2026-04-25T15:17:35",
+          "event": "Step 1: Port reachability check \u2014 COMPLETED",
+          "by": "L1-Support"
+        },
+        {
+          "at": "2026-04-25T15:17:35",
+          "event": "Step 2: Firewall rule audit \u2014 COMPLETED",
+          "by": "L1-Support"
+        },
+        {
+          "at": "2026-04-25T15:17:35",
+          "event": "Step 3: Check service health \u2014 COMPLETED",
+          "by": "L1-Support"
+        },
+        {
+          "at": "2026-04-25T15:17:36",
+          "event": "Step 4: Review recent change log \u2014 COMPLETED",
+          "by": "L1-Support"
+        },
+        {
+          "at": "2026-04-25T15:17:36",
+          "event": "Step 5: Restore or rollback \u2014 COMPLETED",
+          "by": "L1-Support"
+        },
+        {
+          "at": "2026-04-25T15:17:36",
+          "event": "Status changed IN_PROGRESS \u2192 RESOLVED | Note: All 5 runbook steps completed. Issue confirmed resolved by L1-Support.",
+          "by": "L1-Support"
+        }
+      ]
+    },
+    {
+      "ticket_id": "TKT-0002",
+      "issue_id": "ISS-0002",
+      "issue_type": "DNS_RESOLUTION_FAILURE",
+      "host": "dns-primary",
+      "priority": "P3",
+      "status": "RESOLVED",
+      "title": "Dns Resolution Failure \u2014 dns-primary",
+      "description": "DNS zone transfer failed \u2014 secondary out of sync",
+      "created_at": "2026-04-25T15:17:31",
+      "updated_at": "2026-04-25T15:17:38",
+      "assigned_to": "L2-Network",
+      "resolution": "All 5 runbook steps completed. Issue confirmed resolved by L2-Network.",
+      "resolved_at": "2026-04-25T15:17:38",
+      "history": [
+        {
+          "at": "2026-04-25T15:17:31",
+          "event": "Ticket created",
+          "by": "AutoMonitor"
+        },
+        {
+          "at": "2026-04-25T15:17:36",
+          "event": "Assigned to L2-Network",
+          "by": "TicketSystem"
+        },
+        {
+          "at": "2026-04-25T15:17:36",
+          "event": "Status changed OPEN \u2192 IN_PROGRESS | Note: Runbook started",
+          "by": "L2-Network"
+        },
+        {
+          "at": "2026-04-25T15:17:36",
+          "event": "Step 1: DNS query test \u2014 COMPLETED",
+          "by": "L2-Network"
+        },
+        {
+          "at": "2026-04-25T15:17:37",
+          "event": "Step 2: DNS service status \u2014 COMPLETED",
+          "by": "L2-Network"
+        },
+        {
+          "at": "2026-04-25T15:17:37",
+          "event": "Step 3: Zone data integrity \u2014 COMPLETED",
+          "by": "L2-Network"
+        },
+        {
+          "at": "2026-04-25T15:17:37",
+          "event": "Step 4: Failover to secondary DNS \u2014 COMPLETED",
+          "by": "L2-Network"
+        },
+        {
+          "at": "2026-04-25T15:17:38",
+          "event": "Step 5: Restore primary DNS \u2014 COMPLETED",
+          "by": "L2-Network"
+        },
+        {
+          "at": "2026-04-25T15:17:38",
+          "event": "Status changed IN_PROGRESS \u2192 RESOLVED | Note: All 5 runbook steps completed. Issue confirmed resolved by L2-Network.",
+          "by": "L2-Network"
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "total": 4,
+    "open": 0,
+    "in_progress": 0,
+    "resolved": 4,
+    "critical_p1": 0
+  }
+}

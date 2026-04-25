@@ -2,7 +2,7 @@
 
 A fully self-contained Python project that simulates what a Network Operations
 Centre (NOC) engineer does every day: detect issues, create tickets, execute
-runbooks, and resolve problems — all automated.
+runbooks, and resolve problems - all automated.
 
 ---
 
@@ -10,11 +10,11 @@ runbooks, and resolve problems — all automated.
 
 | Real-World Tool | This Project's Equivalent |
 |-----------------|---------------------------|
-| Zabbix / PRTG   | `monitor.py` — polling & alerting |
-| JIRA / ServiceNow | `ticketing.py` — ticket lifecycle |
-| Confluence Runbooks | `troubleshooter.py` — step-by-step playbooks |
-| Syslog / Splunk | `logs/monitor.log` — structured audit log |
-| CMDB / Network devices | `issue_simulator.py` — realistic issue generator |
+| Zabbix / PRTG   | `monitor.py` - polling & alerting |
+| JIRA / ServiceNow | `ticketing.py` - ticket lifecycle |
+| Confluence Runbooks | `troubleshooter.py` - step-by-step playbooks |
+| Syslog / Splunk | `logs/monitor.log` - structured audit log |
+| CMDB / Network devices | `issue_simulator.py` - realistic issue generator |
 
 ---
 
@@ -22,7 +22,7 @@ runbooks, and resolve problems — all automated.
 
 ```
 netmon/
-├── main.py                  # Entry point — runs the full pipeline
+├── main.py                  # Entry point - runs the full pipeline
 ├── README.md                # This file
 │
 ├── core/
@@ -32,13 +32,13 @@ netmon/
 │   └── troubleshooter.py    # Stage 6: Step-by-step resolution runbooks
 │
 ├── logs/
-│   └── monitor.log          # Auto-generated — full audit trail
+│   └── monitor.log          # Auto-generated - full audit trail
 │
 ├── tickets/
-│   └── tickets.json         # Auto-generated — persistent ticket store
+│   └── tickets.json         # Auto-generated - persistent ticket store
 │
 └── data/
-    └── last_run.json        # Auto-generated — full JSON export of last run
+    └── last_run.json        # Auto-generated - full JSON export of last run
 ```
 
 ---
@@ -46,7 +46,7 @@ netmon/
 ## Requirements
 
 - **Python 3.10+** (uses dataclasses, match statements)
-- **No external libraries** — 100% Python standard library
+- **No external libraries** - 100% Python standard library
 
 ---
 
@@ -56,13 +56,13 @@ netmon/
 # Navigate into the project folder
 cd netmon
 
-# Full run — 3 monitoring cycles, ~12 issues, all auto-resolved
+# Full run - 3 monitoring cycles, ~12 issues, all auto-resolved
 python main.py
 
-# Demo run — shorter, 2 cycles, 4 issues (good for first look)
+# Demo run - shorter, 2 cycles, 4 issues (good for first look)
 python main.py --mode demo
 
-# Report only — shows tickets from previous run (no new monitoring)
+# Report only - shows tickets from previous run (no new monitoring)
 python main.py --mode report
 ```
 
@@ -70,7 +70,7 @@ python main.py --mode report
 
 ## The Eight Stages Explained
 
-### Stage 1 — What This System Does
+### Stage 1 - What This System Does
 
 A **NOC (Network Operations Centre)** monitors infrastructure 24/7. When
 something goes wrong, the workflow is:
@@ -89,11 +89,11 @@ Runbook executed step by step
 Issue resolved → Ticket closed (RESOLVED)
 ```
 
-This project simulates all of that — no real network needed.
+This project simulates all of that - no real network needed.
 
 ---
 
-### Stage 2 — System Components
+### Stage 2 - System Components
 
 | Component | File | Why It Exists |
 |-----------|------|---------------|
@@ -105,7 +105,7 @@ This project simulates all of that — no real network needed.
 
 ---
 
-### Stage 3 — Issue Types Simulated
+### Stage 3 - Issue Types Simulated
 
 | Issue | Severity | Real-World Cause |
 |-------|----------|-----------------|
@@ -122,7 +122,7 @@ Each issue comes with:
 
 ---
 
-### Stage 4 — Monitoring Logic
+### Stage 4 - Monitoring Logic
 
 The monitor runs in polling cycles (like Zabbix every 60 seconds).
 
@@ -140,7 +140,7 @@ If `issue_severity >= min_severity` → alert fires → ticket is created automa
 
 ---
 
-### Stage 5 — Ticket Lifecycle
+### Stage 5 - Ticket Lifecycle
 
 Tickets follow this state machine:
 
@@ -159,15 +159,15 @@ Priority mapping mirrors PagerDuty / JIRA:
 | MEDIUM | P3 | 8 hours |
 | LOW | P4 | 24 hours |
 
-Every state change is appended to the ticket's **history** — a full audit trail.
+Every state change is appended to the ticket's **history** - a full audit trail.
 
 ---
 
-### Stage 6 — Troubleshooting Runbooks
+### Stage 6 - Troubleshooting Runbooks
 
-Each issue type has a specific runbook — a checklist of diagnostic steps.
+Each issue type has a specific runbook - a checklist of diagnostic steps.
 
-Example — VPN_FAILURE runbook:
+Example - VPN_FAILURE runbook:
 1. Verify VPN service status (`systemctl status`)
 2. Check auth server (RADIUS ping)
 3. Review VPN daemon logs
@@ -178,7 +178,7 @@ This mirrors how real NOC engineers follow documented procedures rather than gue
 
 ---
 
-### Stage 7 — Automation
+### Stage 7 - Automation
 
 The key automation hook is the `on_alert` callback:
 
@@ -203,15 +203,15 @@ Automation reduces that to milliseconds, and nothing falls through the cracks.
 
 ---
 
-### Stage 8 — Output Files
+### Stage 8 - Output Files
 
 After each run you get:
 
 | File | Contents |
 |------|----------|
-| `logs/monitor.log` | Full timestamped audit log — every check, alert, step |
-| `tickets/tickets.json` | Persistent ticket store — survives restarts |
-| `data/last_run.json` | Complete JSON export — stats + all ticket details |
+| `logs/monitor.log` | Full timestamped audit log - every check, alert, step |
+| `tickets/tickets.json` | Persistent ticket store - survives restarts |
+| `data/last_run.json` | Complete JSON export - stats + all ticket details |
 
 ---
 
@@ -221,11 +221,11 @@ After each run you get:
 > "It simulates a NOC monitoring pipeline. A monitor detects network issues like
 > VPN failures or DNS outages, automatically creates a ticket with priority and
 > SLA, then executes a step-by-step runbook to resolve it. Everything is logged
-> for audit purposes — just like Zabbix feeding into ServiceNow."
+> for audit purposes - just like Zabbix feeding into ServiceNow."
 
 **"How does ticketing work?"**
 > "Tickets have a lifecycle: OPEN → IN_PROGRESS → RESOLVED. Every state change
-> is recorded in the ticket history with a timestamp and actor — L1-Support or
+> is recorded in the ticket history with a timestamp and actor - L1-Support or
 > L2-Network depending on the issue type. P1 critical issues get a 1-hour SLA."
 
 **"What automation did you add?"**
